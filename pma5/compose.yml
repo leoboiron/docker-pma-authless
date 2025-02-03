@@ -1,0 +1,29 @@
+services:
+  db:
+    image: mariadb:10.3
+    container_name: mariadb-5
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+  pma-authless:
+    image: pma-authless:5
+    container_name: pma-authless-5
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AES_KEY: AES_KEY_BASE64_ENCODED
+      PMA_HOST: 127.0.0.1
+      PMA_PORT: 3306
+      PMA_USER: user
+      PMA_PASSWORD: PMA_PASSWORD_RSA_ENCRYPTED_BASE64_ENCODED
+      SSH_HOST: 192.168.1.1
+      SSH_PORT: 22
+      SSH_USER: user
+      SSH_KEY: SSH_KEY_RSA_ENCRYPTED_BASE64_ENCODED
+      # - or -
+      # SSH_PASSWORD: SSH_PASSWORD_RSA_ENCRYPTED_BASE64_ENCODED
+    ports:
+      - "8085:80"

@@ -1,0 +1,31 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: [pma5]
+        tag: [5]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image for ${{ matrix.folder }}
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pma-authless:${{ matrix.tag }} ./${{ matrix.folder }}
+
+      - name: Push Docker image for ${{ matrix.folder }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pma-authless:${{ matrix.tag }}
