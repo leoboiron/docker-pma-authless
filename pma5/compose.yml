@@ -7,9 +7,9 @@ services:
       MYSQL_DATABASE: db
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-  pma-authless:
-    image: pma-authless:5
-    container_name: pma-authless-5
+  pma-aesauth:
+    image: pma-aesauth:5
+    container_name: pma-aesauth-5
     build:
       context: .
       dockerfile: Dockerfile

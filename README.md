@@ -1,13 +1,13 @@
-# pma-authless - PHPMyAdmin Without Authentication & Automatic SSH Connection
+# pma-aesauth - PHPMyAdmin With Automatic SSH Connection (AES-Encrypted)
 
 ## ⚠️ Security Warning
 Do not deploy this image on a publicly accessible infrastructure without additional protection.
 This configuration removes all authentication, meaning anyone can access your server and databases. **Use at your own risk.**
 
 ## Description
-pma-authless is a Docker image based on PHPMyAdmin, modified to allow automatic connection to a database via SSH.
-- Docker Hub: [leoboiron/pma-authless](https://hub.docker.com/r/leoboiron/pma-authless)
-- GitHub: [leoboiron/docker-pma-authless](https://github.com/leoboiron/docker-pma-authless)
+pma-aesauth is a Docker image based on PHPMyAdmin, modified to allow automatic connection to a database via SSH. Credentials are encrypted using AES encryption and Base64 encoding.
+- Docker Hub: [leoboiron/pma-aesauth](https://hub.docker.com/r/leoboiron/pma-aesauth)
+- GitHub: [leoboiron/docker-pma-aesauth](https://github.com/leoboiron/docker-pma-aesauth)
 
 **Security Measures:**
 - The AES key used for encrypting passwords and SSH keys must be **Base64-encoded** before being provided.
@@ -18,7 +18,7 @@ pma-authless is a Docker image based on PHPMyAdmin, modified to allow automatic 
 
 ### Docker Pull Command
 ```bash
-docker pull leoboiron/pma-authless:5
+docker pull leoboiron/pma-aesauth:5
 ```
 
 ### Environment Variables
@@ -64,7 +64,7 @@ docker run -d --name phpmyadmin \
   -e SSH_USER="user" \
   -e SSH_PASSWORD="encrypted_ssh_password_base64" \
   -p 8085:80 \
-  leoboiron/pma-authless:5
+  leoboiron/pma-aesauth:5
   ```
   If using an SSH key:
   ```bash
@@ -79,7 +79,7 @@ docker run -d --name phpmyadmin \
   -e SSH_USER="user" \
   -e SSH_KEY="encrypted_ssh_key_base64" \
   -p 8085:80 \
-  leoboiron/pma-authless:5
+  leoboiron/pma-aesauth:5
 ```
 ## License
 

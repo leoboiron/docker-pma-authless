@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Docker image for ${{ matrix.folder }}
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pma-authless:${{ matrix.tag }} ./${{ matrix.folder }}
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/pma-aesauth:${{ matrix.tag }} ./${{ matrix.folder }}
 
       - name: Push Docker image for ${{ matrix.folder }}
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pma-authless:${{ matrix.tag }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/pma-aesauth:${{ matrix.tag }}
